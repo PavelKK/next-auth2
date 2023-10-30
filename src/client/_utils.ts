@@ -54,6 +54,7 @@ export async function fetchData<T = any>(
     if (!res.ok) throw data
     return Object.keys(data).length > 0 ? data : null // Return null if data empty
   } catch (error) {
+    console.log("🚀 ~ file: _utils.ts:57 ~ error:", JSON.stringify(error))
     logger.error("CLIENT_FETCH_ERROR", { error: error as Error, url })
     return null
   }
