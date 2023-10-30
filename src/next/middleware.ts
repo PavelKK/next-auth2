@@ -173,7 +173,7 @@ export type WithAuthArgs =
 
 /**
  * Middleware that checks if the user is authenticated/authorized.
- * If they aren't, they will be redirected to the login page.
+ * If if they aren't, they will be redirected to the login page.
  * Otherwise, continue.
  *
  * @example
@@ -186,7 +186,39 @@ export type WithAuthArgs =
  * ---
  * [Documentation](https://next-auth.js.org/configuration/nextjs#middleware)
  */
-export function withAuth(...args: WithAuthArgs) {
+
+export function withAuth(): ReturnType<NextMiddlewareWithAuth>
+
+export function withAuth(
+  req: NextRequestWithAuth
+): ReturnType<NextMiddlewareWithAuth>
+
+export function withAuth(
+  req: NextRequestWithAuth,
+  event: NextFetchEvent
+): ReturnType<NextMiddlewareWithAuth>
+
+export function withAuth(
+  req: NextRequestWithAuth,
+  options: NextAuthMiddlewareOptions
+): ReturnType<NextMiddlewareWithAuth>
+
+export function withAuth(
+  middleware: NextMiddlewareWithAuth,
+  options: NextAuthMiddlewareOptions
+): NextMiddlewareWithAuth
+
+export function withAuth(
+  middleware: NextMiddlewareWithAuth
+): NextMiddlewareWithAuth
+
+export function withAuth(
+  options: NextAuthMiddlewareOptions
+): NextMiddlewareWithAuth
+
+export function withAuth(
+  ...args: WithAuthArgs
+): ReturnType<NextMiddlewareWithAuth> | NextMiddlewareWithAuth {
   if (!args.length || args[0] instanceof Request) {
     // @ts-expect-error
     return handleMiddleware(...args)
