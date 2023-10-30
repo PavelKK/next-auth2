@@ -81,7 +81,7 @@ function _fetchData() {
           case 16:
             _context.prev = 16;
             _context.t0 = _context["catch"](2);
-            console.log("🚀 ~ file: _utils.js:84 ~ error:", JSON.stringify(_context.t0))
+            console.log("🚀 ~ file: _utils.js:84 ~ error:", _context.t0)
             logger.error("CLIENT_FETCH_ERROR", {
               error: _context.t0,
               url: url
