@@ -54,6 +54,7 @@ export default async function session(
       })
 
       const newExpires = fromDate(sessionMaxAge)
+      console.log("🚀 ~ file: session.ts:57 ~ newExpires:", newExpires)
 
       // By default, only exposes a limited subset of information to the client
       // as needed for presentation purposes (e.g. "you are logged in as...").
@@ -73,6 +74,7 @@ export default async function session(
 
       // Return session payload as response
       response.body = updatedSession
+      console.log("🚀 ~ file: session.ts:77 ~ updatedSession?.user:", updatedSession?.user)
 
       // Refresh JWT expiry by re-signing it, with an updated expiry date
       const newToken = await jwt.encode({
@@ -90,6 +92,7 @@ export default async function session(
 
       await events.session?.({ session: updatedSession, token })
     } catch (error) {
+      console.log("🚀 ~ file: session.ts:94 ~ error:", error)
       // If JWT not verifiable, make sure the cookie for it is removed and return empty object
       logger.error("JWT_SESSION_ERROR", error as Error)
 
