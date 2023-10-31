@@ -164,6 +164,7 @@ export default async function session(
         // @ts-expect-error
         await events.session?.({ session: sessionPayload })
       } else if (sessionToken) {
+        console.log("🚀 ~ file: session.ts:167 ~ sessionToken:", sessionToken)
         // If `sessionToken` was found set but it's not valid for a session then
         // remove the sessionToken cookie from browser.
         response.cookies?.push(...sessionStore.clean())
