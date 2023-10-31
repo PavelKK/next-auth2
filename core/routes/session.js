@@ -52,6 +52,7 @@ async function session(params) {
         session: newSession
       });
       const newExpires = (0, _utils.fromDate)(sessionMaxAge);
+      console.log("🚀 ~ file: session.js:55 ~ session ~ newExpires:", newExpires)
       const updatedSession = await callbacks.session({
         session: {
           user: {
@@ -64,6 +65,7 @@ async function session(params) {
         token
       });
       response.body = updatedSession;
+      console.log("🚀 ~ file: session.ts:68 ~ updatedSession?.user:", updatedSession?.user)
       const newToken = await jwt.encode({ ...jwt,
         token,
         maxAge: options.session.maxAge
@@ -141,6 +143,7 @@ async function session(params) {
           session: sessionPayload
         }));
       } else if (sessionToken) {
+        console.log("🚀 ~ file: session.js:144 ~ session ~ sessionToken:", sessionToken)
         var _response$cookies4;
 
         (_response$cookies4 = response.cookies) === null || _response$cookies4 === void 0 ? void 0 : _response$cookies4.push(...sessionStore.clean());
