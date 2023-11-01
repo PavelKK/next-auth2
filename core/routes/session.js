@@ -52,7 +52,7 @@ async function session(params) {
         session: newSession
       });
       const newExpires = (0, _utils.fromDate)(sessionMaxAge);
-      console.log("🚀 ~ file: session.js:55 ~ session ~ newExpires:", newExpires)
+      console.log("🚀 ~ file: session.js:55 ~ session ~ newExpires:", new Date().toLocaleTimeString() + '--> ' +  newExpires)
       const updatedSession = await callbacks.session({
         session: {
           user: {
@@ -65,7 +65,7 @@ async function session(params) {
         token
       });
       response.body = updatedSession;
-      console.log("🚀 ~ file: session.ts:68 ~ updatedSession?.user:", updatedSession?.user)
+      console.log("🚀 ~ file: session.ts:68 ~ token ", new Date().toLocaleTimeString() + '--> ' + token)
       const newToken = await jwt.encode({ ...jwt,
         token,
         maxAge: options.session.maxAge
@@ -73,11 +73,13 @@ async function session(params) {
       const sessionCookies = sessionStore.chunk(newToken, {
         expires: newExpires
       });
+      console.log("🚀 ~ file: session.js:76 ~ session ~ sessionCookies:")
       (_response$cookies = response.cookies) === null || _response$cookies === void 0 ? void 0 : _response$cookies.push(...sessionCookies);
       await ((_events$session = events.session) === null || _events$session === void 0 ? void 0 : _events$session.call(events, {
         session: updatedSession,
         token
       }));
+      console.log("🚀 ~ file: session.js:78 ~ await ~ _events$session:")
     } catch (error) {
       var _response$cookies2;
 
